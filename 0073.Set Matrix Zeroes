@@ -1,0 +1,62 @@
+//Leetcode 73. Set Matrix Zeroes 
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean zeroinfirstrow=false;
+        boolean zeroinfirstcolumn=false;
+        
+        // to check there is zero in first row
+        for(int j=0; j< n;j++){
+            if(matrix[0][j]==0){
+                zeroinfirstrow=true;
+                break;
+            }
+        }
+
+      // to check there is zero in first column
+        for(int i=0; i< m;i++){
+            if(matrix[i][0]==0){
+                zeroinfirstcolumn=true;
+                break;
+            }
+        }
+       //filling 0's in first row and col to just take an trck for inner ones
+
+           for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+           if(matrix[i][j]==0){
+            matrix[0][j]=0;
+            matrix[i][0]=0;
+           }
+            }
+        }
+
+        //filling 0's except first row and col from the  above tracking
+
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+           if(matrix[0][j]==0 || matrix[i][0]==0){
+            matrix[i][j]=0;
+           }
+            }
+        }
+
+      //filling 0's in 1s row if needed
+
+        if(zeroinfirstrow){
+        for(int j = 0 ; j<n;j++){
+            matrix[0][j]=0;
+        }
+       }
+
+        //filling 0's in 1s column if needed
+
+       if(zeroinfirstcolumn){
+        for(int i = 0 ; i<m ;i++ ){
+            matrix[i][0]=0;
+        }
+       }
+    }
+}
