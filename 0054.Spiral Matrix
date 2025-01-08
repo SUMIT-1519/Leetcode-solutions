@@ -1,0 +1,54 @@
+//Leetcode 54. Spiral Matrix 
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        if(matrix.length ==0) 
+        return new ArrayList<>();
+        
+        List<Integer> ans= new ArrayList<>();
+        int m= matrix.length;
+        int n= matrix[0].length;
+        int startrow=0;
+        int startcol=0;
+        int endrow= m-1;
+        int endcol= n-1;
+
+        while(ans.size() < m*n && startrow<=endrow && startcol<=endcol){
+
+          //to print top row
+            for(int j= startcol; j<= endcol  ; j++){
+              ans.add(matrix[startrow][j]);
+            }
+            startrow++;
+          // to print end column
+            for(int i= startrow; i<= endrow ; i++){
+              ans.add(matrix[i][endcol]);
+            }
+            endcol--;
+
+         // to print end row
+            if(startrow <= endrow){
+                for(int j= endcol; j>= startcol  ; j--){
+                  ans.add(matrix[endrow][j]);
+                  }
+                  
+            endrow--;
+            }
+           // to print start column 
+            if(startcol <= endcol){
+             for(int i= endrow ; i >= startrow ; i--){
+             ans.add(matrix[i][startcol]);
+             } 
+             startcol++;
+             
+            }
+
+              
+           // startrow++;
+            //startcol++;
+            //endrow--;
+            // endcol--;
+        }
+        return ans;
+    }
+}
