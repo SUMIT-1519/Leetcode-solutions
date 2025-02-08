@@ -1,0 +1,19 @@
+//leetcode 0930. Binary Subarray with Sum
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        HashMap<Integer,Integer> sumfreqmap = new HashMap<>();
+        int count=0;
+        int prefixsum=0;
+        sumfreqmap.put(0,1); //as if we got prefixcum-goal =0 we have to increse the count as this single elemnt is also a valid subarray
+        for(int i = 0; i < nums.length;i++){
+            prefixsum+=nums[i];
+            if(sumfreqmap.containsKey(prefixsum-goal)){
+                count+=sumfreqmap.get(prefixsum-goal);
+            }
+            sumfreqmap.put(prefixsum,sumfreqmap.getOrDefault(prefixsum,0)+1);//we store the prifix sum in map as it become the previous sum for next element
+
+        }
+        return count;
+        
+    }
+}
