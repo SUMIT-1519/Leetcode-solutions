@@ -1,0 +1,19 @@
+//leetcode 0198.House Robber
+
+class Solution {
+    public int rob(int[] nums) {
+        int totalloot[]= new int[nums.length];
+       // int totallootMax=0;
+        if(nums.length<2){
+            return nums[0];
+        }
+    totalloot[0]=nums[0];
+    totalloot[1]=Math.max(nums[0],nums[1]);
+    for(int i= 2 ;i<nums.length ; i++){
+        //totallootMax = Math.max(totalloot[i-2]+nums[i],nums[i]);
+       // totalloot[i]=totallootMax;
+      totalloot[i] = Math.max(totalloot[i-2]+nums[i],totalloot[i-1]);
+    }
+    return totalloot[nums.length-1];
+  }
+}
