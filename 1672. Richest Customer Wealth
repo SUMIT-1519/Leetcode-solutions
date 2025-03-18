@@ -1,0 +1,16 @@
+//leetcode 1672. Richest Customer Wealth
+
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+       int customerWealth =0;
+       int  maxWealth=0;
+   for(int i = 0 ; i< accounts.length;i++){
+    for (int j=0; j< accounts[0].length;j++){
+        customerWealth+=accounts[i][j];
+    }
+    maxWealth= Math.max(customerWealth,maxWealth);
+    customerWealth=0;
+   }
+   return maxWealth;
+    }
+}
