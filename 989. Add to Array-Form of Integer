@@ -1,0 +1,31 @@
+//leetcode.989. Add to Array-Form of Integer
+
+class Solution {
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        List<Integer> result = new ArrayList<>();
+        int i = num.length-1;
+
+        while(k > 0 || i >=0 ){
+            int digitSum =0 ;
+            int ans =0;
+             if (i >= 0) {
+                digitSum = num[i] + k % 10;
+                i--;
+            } else {
+                digitSum = k % 10;
+            }
+
+            if( digitSum >= 10){
+                ans= digitSum % 10 ;
+                result.add(ans);
+                k= k/10+digitSum/10;
+            }else {
+                result.add(digitSum);
+                k=k/10;
+            }
+
+        }
+          Collections.reverse(result);
+        return result; 
+    }
+}
