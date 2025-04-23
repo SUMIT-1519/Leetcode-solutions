@@ -1,0 +1,31 @@
+//leetcode. 0069. Sqrt(x)
+class Solution {
+    public int mySqrt(int x) {
+        if (x == 0 || x == 1) {
+            return x;
+        }
+        
+        int left = 1, right = x / 2, result = 0;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            // Check if mid*mid is the square root
+            if (mid * mid == x) {
+                return mid;
+            }
+            
+            // If mid*mid is less than x, the square root must be greater than mid
+            if (mid * mid < x) {
+                left = mid + 1;
+                result = mid;  // Store mid as the current best candidate
+            } 
+            // If mid*mid is greater than x, the square root must be smaller than mid
+            else {
+                right = mid - 1;
+            }
+        }
+        
+        return result;
+    }
+}
