@@ -1,0 +1,67 @@
+//leetcode.34. Find First and Last Position of Element in Sorted Array
+
+Approach 1: using two loops from start and from end
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int position[]={-1,-1};
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==target){
+                position[0]=i;
+                break;
+            }
+        }
+        for(int i=nums.length-1;i>=0;i--){
+            if(nums[i]==target){
+                position[1]=i;
+                break;
+            }
+        }
+        return position;
+    }
+}
+
+Approach 2:34. Find First and Last Position of Element in Sorted Array
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int firstIndex = firstPosition(nums, target);
+        int lastIndex = lastPosition(nums, target);
+        return new int[] { firstIndex, lastIndex };
+    }
+
+    private int firstPosition(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int index = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                index = mid;
+                right = mid - 1;                  // searching for is the element is present in the left 
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return index;
+    }
+
+    private int lastPosition(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int index = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                index = mid;
+                left = mid + 1;                       // searching for is the element is present in the right 
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return index;
+    }
+}
