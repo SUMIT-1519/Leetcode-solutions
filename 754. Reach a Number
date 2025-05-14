@@ -1,0 +1,29 @@
+//leetcode.754. Reach a Number
+
+// not all testcases are passed
+class Solution {
+    public int reachNumber(int target) {
+         target = Math.abs(target);
+        int left=0;
+        int right=target;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            int sumTillMid=mid*(mid+1)/2;
+            if(sumTillMid == target){
+                return mid;
+            } else if (sumTillMid < target) {
+                // Need more steps
+                left = mid + 1;
+            }
+            else if(sumTillMid > target) {
+                int diff=sumTillMid-target;
+                if(diff%2 !=0){
+                    left=mid+1;
+                }else{
+                     right = mid -1; //we can have the mid whoes sumTillMid and target diff is also even 
+                }
+            }
+        }
+        return left;
+    }
+}
