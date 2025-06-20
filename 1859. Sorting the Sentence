@@ -13,3 +13,15 @@ class Solution {
         return String.join(" ",result);
     }
 }
+
+
+if we dont want to use join then we ca solve using string builder also 
+StringBuilder finalresult = new StringBuilder();
+        for (int i = 0; i < result.length; i++) {
+            finalresult.append(result[i]);
+            if (i != result.length - 1) {
+                finalresult.append(" ");
+            }
+        }
+
+        return finalresult.toString();
