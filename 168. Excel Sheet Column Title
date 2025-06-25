@@ -1,0 +1,17 @@
+//leetcode. 168. Excel Sheet Column Title
+
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        StringBuilder result = new StringBuilder();
+
+        while (columnNumber > 0) {
+            columnNumber--; // shift to 0-based
+            int remainder = columnNumber % 26;
+            char currentChar = (char) ('A' + remainder);
+            result.append(currentChar);
+            columnNumber /= 26;
+        }
+
+        return result.reverse().toString(); // Reverse because we build from least significant to most
+    }
+}
