@@ -1,0 +1,56 @@
+//leetcode. 283. Move Zeroes
+approach 1:
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int output[] = new int[nums.length];
+        int j = 0 ;
+        for(int i =0 ; i < nums.length ; i++){
+
+            if(nums[i]!= 0){
+                output[j]= nums[i];
+                j++;
+            }
+        }
+        for (int i =0 ; i < nums.length ; i++){
+            nums[i]= output[i];
+        }
+        
+    }
+}
+
+
+approach 2:// same as approach 1 which i did just doing it by in place 
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int j = 0;
+        for(int i =0 ; i < nums.length; i ++){
+            if (nums[i]!= 0 ){
+                nums[j]=nums[i];    
+                j++;
+            }
+        }
+        while(j < nums.length){
+            nums[j]=0;
+            j++;
+        }
+    }
+}
+
+approach 3: using two pointer and swapping :
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int j =0;
+        for (int i = 0 ; i < nums.length ; i++){
+            if (nums[i]!= 0){
+                if(j != i ){
+                    int temp = nums[i];
+                    nums[i]=nums[j];
+                    nums[j]=temp;
+                }
+                j++;  // it indicates the positio of zero 
+            }
+        }
+    }
+}
+
+
