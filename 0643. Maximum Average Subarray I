@@ -1,0 +1,27 @@
+//leetcode : 643. Maximum Average Subarray I
+
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int i = 0;
+        int j = 0;
+        double average;
+        double maxAverage = Double.NEGATIVE_INFINITY;//as aur maxsum can be negative 
+        double sum = 0;
+        while(j < nums.length){
+            sum += nums[j];
+            if(j-i+1 < k){
+                j++;
+            }else if (j - i +1 ==k){
+                average = sum/k;
+                maxAverage = Math.max(average , maxAverage);
+
+                sum= sum - nums[i];
+                i++;
+                j++;
+            }
+
+        }
+        return maxAverage;
+    }
+}
