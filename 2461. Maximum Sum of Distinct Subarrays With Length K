@@ -1,0 +1,64 @@
+//leetcode 2461. Maximum Sum of Distinct Subarrays With Length K
+Brute force approach: not good for large arrays 
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        int maxSum=0;
+        for ( int i =0 ; i <=nums.length - k  ; i++){
+             HashSet<Integer> set = new HashSet<>();
+             int sum =0;
+             boolean isDistinct = true;
+            for (int j=i ; j < i + k ; j++ ){
+                if(set.contains(nums[j])){
+                    isDistinct=false;
+                    break;
+                }
+                set.add(nums[j]);
+                sum=sum + nums[j];
+            }
+            if(isDistinct){
+               maxSum = Math.max(maxSum , sum );
+             }
+        }
+        return maxSum;
+    }
+}
+
+Approach 2 : sliding Window 
+import java.util.*;
+
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        long windowSum = 0;
+        long maxSum = 0;
+        int left = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+            // Add new element
+            windowSum += nums[right];
+            freq.put(nums[right], freq.getOrDefault(nums[right], 0) + 1);
+
+            // Shrink window if duplicate or size > k
+            while (freq.get(nums[right]) > 1 || (right - left + 1) > k) {
+                int leftVal = nums[left];
+                windowSum -= leftVal;
+                freq.put(leftVal, freq.get(leftVal) - 1);
+                if (freq.get(leftVal) == 0) freq.remove(leftVal);
+                left++;
+            }
+
+            // If window size exactly k and all distinct, update maxSum
+            if (right - left + 1 == k) {
+                maxSum = Math.max(maxSum, windowSum);
+
+                // Move left for next window
+                int leftVal = nums[left];
+                windowSum -= leftVal;
+                freq.put(leftVal, freq.get(leftVal) - 1);
+                if (freq.get(leftVal) == 0) freq.remove(leftVal);
+                left++;
+            }
+        }
+        return maxSum;
+    }
+}
