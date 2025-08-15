@@ -40,6 +40,37 @@ class Solution {
                     count++;
                 }
             }
+
+
+
+approach using sliding window :
+class Solution {
+    public int numberOfSubstrings(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int i = 0, j = 0, count = 0;
+
+        while (j < s.length()) {
+            char ch = s.charAt(j);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+
+            // Shrink the window while we have all 3 characters
+            while (map.size() == 3) {
+                // Every substring starting from i to end at j, j+1, ... is valid
+                count += s.length() - j;
+
+                char leftChar = s.charAt(i);
+                map.put(leftChar, map.get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
+                }
+                i++;
+            }
+            j++;
+        }
+        return count;
+    }
+}
+
         }
         return count;
     }
