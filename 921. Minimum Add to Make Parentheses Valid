@@ -1,0 +1,20 @@
+//leetcode : 921. Minimum Add to Make Parentheses Valid
+
+class Solution {
+    public int minAddToMakeValid(String s) {
+        Stack <Character> minAdd = new Stack<>();
+
+        for( char ch : s.toCharArray()){
+            if(ch==')'){
+            if( !minAdd.isEmpty() && minAdd.peek()== '('){
+                minAdd.pop();
+            }else{
+                minAdd.push(ch);
+            }
+            }else{
+                minAdd.push(ch);
+            }
+        }
+        return minAdd.size();
+    }
+}
