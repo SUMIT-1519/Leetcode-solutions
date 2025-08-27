@@ -1,0 +1,33 @@
+//leetcode: 0020.Valid Paranthesis 
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack <Character> valid = new Stack<>();
+
+        for(char ch : s.toCharArray()){
+            if(ch == '(' || ch == '[' || ch == '{'){
+                valid.push(ch);
+            }else {
+             if(ch == ')'){
+                if( valid.isEmpty() || valid.pop() != '('){
+                    return false ;
+                }
+             }
+             if(ch == '}'){
+                if( valid.isEmpty() || valid.pop() != '{'){
+                    return false ;
+                }
+             }
+             if(ch == ']'){
+                if( valid.isEmpty() || valid.pop () != '['){
+                    return false ;
+                }
+             }
+            }
+            
+        }
+
+
+        return valid.isEmpty();
+    }
+}
